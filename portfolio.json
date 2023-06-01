@@ -56,54 +56,46 @@
         {
             "title":"FamiShield",
             "header_img":"https://i.imgur.com/eLVaJjW.png",
-            "icon":"https://play-lh.googleusercontent.com/pLb3gdcw_EEN-aDmTobcKRAwKcjJXMqKax-yytMxUQ7sCFPVwkOEA5t4fe3SSnXHmD8=w240-h480-rw",
-            "web_link_img":"https://i.imgur.com/yu4Z6ZC.png",
-            "googlePlay_link_img":"https://i.imgur.com/d6882Lg.png",
-            "website_link":"https://www.videohunter.net/videohunter-for-android/",
-            "googlePlay_link":"https://play.google.com/store/apps/details?id=com.videohunter.videohunter&hl=zh-cn",
+            "icon":"https://i.imgur.com/xlHnenB.png",
+            "web_link_img":null,
+            "googlePlay_link_img":null,
+            "website_link":null,
+            "googlePlay_link":null,
             "intro":{
-                "zh_cn":"VideoHunter是一款视频下载应用，支持Youtube,Instagram等100+网站，使用VideoHunter可以轻松且安静的下载视频网站的视频，您可以一边观看视频一边下载视频，如果有需要您也可以把视频的字幕嵌入视频当中。VideoHunter还支持多个视频同时下载，最多的时候可以同时下载四个视频。在界面上，VideoHunter使用嵌套路由，每个卡都有自己的路由，互不干涉却又相互关联，另外还支持黑暗模式，天黑不刺眼，最好的关怀！",
-                "en_us":"VideoHunter is a video download application that supports Youtube, Instagram and other 100+ websites. Using Video Hunter can easily and quietly download videos from video websites. You can download videos while watching videos. If necessary, you can also put the subtitles of the videos embedded in the video. Video Hunter also supports simultaneous download of multiple videos, up to four videos can be downloaded at the same time. On the interface, Video Hunter uses nested routing, and each card has its own routing, which does not interfere with each other but is related to each other. In addition, it also supports dark mode, which is not dazzling in the dark, the best care!"
+                "zh_cn":"FamiShield是一款家庭安全应用，由孩子端和父母端组成，父母端可以控制孩子端的手机，包括使用时间，软件使用记录，电话短信网络记录，禁用应用，立即锁屏，网站拦截等功能。孩子端的信息以分钟级的水平上传，当父母端的配置更新时，孩子端以不超过一秒的时间同步配置，可以说父母端的操作是即时生效的。",
+                "en_us":"FamiShield is a family security application, which consists of a child terminal and a parent terminal. The parent terminal can control the child's mobile phone, including usage time, software usage records, phone and SMS network records, disabled applications, immediate lock screen, website blocking and other functions. The information on the child side is uploaded at the level of minutes. When the configuration of the parent side is updated, the child side will synchronize the configuration in no more than one second. It can be said that the operation of the parent side takes effect immediately."
             },
             "special":{
                 "zh_cn":[
-                    "原生通讯",
-                    "嵌套路由",
+                    "数据收集",
+                    "数据上传",
+                    "复杂权限申请",
                     "http",
-                    "数据持久化",
-                    "webview",
-                    "局部刷新&状态管理",
-                    "文件写入&管理",
-                    "黑暗模式",
-                    "应用更新",
+                    "firebase",
+                    "后台运行",
+                    "软件更新",
                     "多语言",
-                    "Firebase",
-                    "Abmob"
+                    "网站拦截",
+                    "锁屏",
+                    "地图和定位",
+                    "Flutter插件实现"
                 ],
                 "en_us":[
-                    "native to flutter",
-                    "nested routes",
-                    "http",
-                    "data persistence",
-                    "webview",
-                    "Partial Refresh & State Management",
-                    "File Writing & Management",
-                    "dark mode",
-                    "app update",
-                    "localizations",
-                    "Firebase",
-                    "Abmob"
+                    "data collection",
+                     "Data Upload",
+                     "Complex permission application",
+                     "http",
+                     "firebase",
+                     "Background process",
+                     "Software update",
+                     "multi-language",
+                     "Website blocking",
+                     "Lock screen",
+                     "Maps and Location",
+                     "Flutter plugin implementation"
                 ]
             },
             "screen":[
-                "https://lh3.googleusercontent.com/T-I84sdsmLnQ2p4JrsBoRrH-EAmLc7mN2NHOM4-AKGsJIGGGb57pWUvB1P6AZB7s2g",
-            "https://lh3.googleusercontent.com/2gG0JBDONMy9XnN9VVNJ1ZrCISCrkYNLkCkv2VpTTHig3KvK3pB6z7qDCVAjactqD8k",
-            "https://lh3.googleusercontent.com/DSyl_w1r3SqzlPqhXLuTwUCST8W3VIWmqfLVhuTxm19P5KOP0fIY-N13mS-BBBY0XVAL",
-            "https://lh3.googleusercontent.com/QVrPs0FcRXyLpW1g2kaqr3DbY5yl_kCDACafqkMgKWhmdjTgiDSIrXKuOPEWkjf8xk8",
-            "https://lh3.googleusercontent.com/nKJAAhKStG5GH-t7yQMv1fExkEnBmJEzl_6TiE0oq-at81bWPWTIHTd0hlZMsyMmSFGq",
-            "https://lh3.googleusercontent.com/_9SH_bpm2QclwzxsaPmE5wztF5WdT5CW1P3-OJz6uJoOR182Bziartt_cPIGDUkFBwI",
-            "https://lh3.googleusercontent.com/x4JvrknyJCumOz2h0ig8VtP4Lgd0w7DR1L3ZuNxRvBo2H09mkvdiTYp7t1j-ifAHd_8",
-            "https://lh3.googleusercontent.com/iB1KfwUkNx8ZXrUDnAeqQYVQNhka03pEnVIu-RFp8y1p7jRTILvoIwe7CoCQXblGp-w"
             ]
         }
     ]
