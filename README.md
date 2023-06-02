@@ -69,3 +69,26 @@ database of imagination24 Project
     ]
 }
 ```
+
+## Blog结构
+```
+{
+    "blog":[
+        {
+            //标题
+            "title":"2022年总结",
+            //副标题
+            "subtitle":"随风而逝的2022会给未来带来什么影响？我不知道朋友们，活在当下吧",
+            //标题大图
+            "header_img":"https://i.imgur.com/VHU9lGY.jpg",
+            //blogID,blogID与图片ID必须一致
+            "detail":"VHU9lGY"
+        },
+    ]
+}
+```
+
+## 如何获取blog内容
+```
+https://raw.githubusercontent.com/imagination24/database/main/blogDetails/$blogId.md
+```
