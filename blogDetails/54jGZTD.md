@@ -18,6 +18,7 @@ Flutter 与 原生通讯的方式有以下三种
 
 ## BasicMessageChannel
 *BasicMessageChannel是可以双端通信的，Flutter 端可以给 iOS 发送消息，iOS 也可以给 Flutter 发送消息。这段代码实现了在 Flutter 中的 TextField 输入文字，在 iOS 端能及时输出。*
+
 Flutter端
 ```
   basicMessageChannelTest(){
@@ -56,6 +57,7 @@ class BasicMessageChannelDemo(messenger: BinaryMessenger) : BasicMessageChannel.
 *MethodChannel一般用于原生代码的调用*
 *MethodChannel的方法名也要保持一致*
 *MethodChannel无需手动分离，通道返回后会自动调用onDetachedFromEngine*
+
 Flutter端
 ```
   methodChannelTest()async{
@@ -107,6 +109,7 @@ Native端（Android）
 
 ## EventChannel
 *EventChannel只能是原生以Stream的方式发送消息给 Flutter 端。如果不需要再收听回调，可以在原生端或者Flutter端取消订阅*
+
 Flutter端
 ```
   eventChannelTest()async{
