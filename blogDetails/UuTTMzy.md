@@ -1,5 +1,8 @@
 # Android-如何获取用户实时应用使用时长
 
+
+
+
 ## 背景
 &emsp;&emsp;从何说起呢？如你所知，我是一个Flutter开发工程师，有Android原生应用的开发背景。在之前的一个项目中，我负责Android端的功能实现，然后我遇到一个获取用户实时使用时长的需求。一番调研之后，发现Android有提供原生的Api，而且Flutter社区上已经有实现好的插件[（usage_stats插件地址）](https://pub.dev/packages/usage_stats)，使用下图这个方法即可获取原生Api的返回数据
 ![image](https://i.imgur.com/6Xpjxj5.png)
@@ -130,5 +133,6 @@ public static List<Map<String, Object>> queryUsageTime(Context context, long beg
         return result;
     }
 ```
-
+如果不想写，可以直接引入我已经实现好的插件
+[Github插件地址](https://github.com/imagination24/usage_state)
 
