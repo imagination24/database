@@ -2,14 +2,14 @@
 
 ## 背景
 &emsp;&emsp;从何说起呢？如你所知，我是一个Flutter开发工程师，有Android原生应用的开发背景。在之前的一个项目中，我负责Android端的功能实现，然后我遇到一个获取用户实时使用时长的需求。一番调研之后，发现Android有提供原生的Api，而且Flutter社区上已经有实现好的插件[（usage_stats插件地址）](https://pub.dev/packages/usage_stats)，使用下图这个方法即可获取原生Api的返回数据
-![image](https://github.com/imagination24/database/assets/88966638/31bd90a2-4ae7-437e-a6b5-a4671b8cd545)
+![image](https://i.imgur.com/6Xpjxj5.png)
 
 
 但简单使用过后，通过检查结果发现这个Api的返回数据并不准确，或者说有大概一天的延迟，是的足足有一天。在Stack-OverFlow搜索发现这个问题是普遍的，也就是说所有人对这个Api调用的返回结果都有延迟，显然这是Api的问题，之后我查阅文档后发现这个一段说明
-![image](https://github.com/imagination24/database/assets/88966638/cff0c86d-0fd2-4ff5-806e-921629f67bdf)
+![image](https://i.imgur.com/D9oLa6R.png)
 
 根据结果推测，我设定的开始时间和结束时间应该是被改了，又经过无数次尝试后，我放弃使用这个Api，非常遗憾。但这个功能该如何实现？感谢stack-overflow，我从中得到了思路：通过使用得知
-![image](https://github.com/imagination24/database/assets/88966638/de1ee59d-d1db-4c76-9f89-1e8c57ca5cf1)
+![image](https://i.imgur.com/BrGojto.png)
 
 
 上图这个方法的返回数据是无误差无延时的，那么我们可以**通过计算前台启动数据来累计应用的使用时间**。
@@ -28,7 +28,26 @@
 ```
 
 权限申请方法
-![image](https://github.com/imagination24/database/assets/88966638/f816c140-82df-469c-aeed-bb7092fa05eb)
+```
+  private boolean isUsagePermission(){
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+      AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+      int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,Process.myUid(), context.getPackageName());
+      if(mode == AppOpsManager.MODE_ALLOWED){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private void grantUsagePermission(){
+    if(!isUsagePermission()){
+      Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      context.startActivity(intent);
+    }
+  }
+```
 
 如果需要在Flutter中使用，仅需实现插件并调用方法即可。需要注意的是如果要使用Flutter在后台查询应用使用数据,需要把权限申请和查询应用使用数据分离，因为后台不能允许任何和UI有关的应用，事实上是任何需要使用到Activity提供的Context的程序都不能在后台运行。
 
