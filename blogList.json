@@ -1,6 +1,12 @@
 {
     "blog":[
         {
+            "title":"Flutter与Native通信",
+            "subtitle":"关于如何实现Flutter与Native通信",
+            "header_img":"https://i.imgur.com/54jGZTD.jpg",
+            "detail":"54jGZTD"
+        },
+        {
             "title":"Android-获取用户实时使用应用数据",
             "subtitle":"关于如何实现获取用户实时使用应用数据",
             "header_img":"https://i.imgur.com/UuTTMzy.jpg",
