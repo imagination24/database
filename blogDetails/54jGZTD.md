@@ -150,12 +150,13 @@ public class MyEventChannel implements FlutterStreamHandler {
 
 # 如何实现Channel?两种方式
 
-## 实现Plugin（AndroidStudio演示）
+## 1.实现Plugin（AndroidStudio演示）
 * 在AndroidStudio file卡 ，点击New ,点击Flutter Project
 
 ![AndroidStudio](https://i.imgur.com/jFpaJwM.png)
 
 * 选择FlutterSDK路径，然后点击Next
+
 ![path](https://i.imgur.com/Pv7YMTt.png)
 
 * 填写相应信息，并选择项目类型为Plugin
@@ -163,6 +164,7 @@ public class MyEventChannel implements FlutterStreamHandler {
 *名字不能大写*
 
 *这里需要注意的是，Flutter可以使用项目地址来引用插件，如果需要用地址来引用，需要把地址写在主项目内*
+
 ![info](https://i.imgur.com/HAB0jlT.png)
 
 * 初始结构
@@ -188,7 +190,7 @@ public class MyEventChannel implements FlutterStreamHandler {
   ```
     skycastle: ^0.0.1
   ```
-## 手动注册（Android演示）
+## 2.手动注册（Android演示）
 * 在主项目的原生代码库中新建类编写原生代码
 ```
 public class SkyCastlePlugin implements FlutterPlugin, MethodCallHandler {
