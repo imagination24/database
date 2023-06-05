@@ -1,6 +1,12 @@
 {
     "blog":[
         {
+            "title":"Android-获取用户实时使用应用数据",
+            "subtitle":"关于如何实现获取用户实时使用应用数据",
+            "header_img":"https://i.imgur.com/UuTTMzy.jpg",
+            "detail":"UuTTMzy"
+        }
+        {
             "title":"2022年总结",
             "subtitle":"随风而逝的2022能给未来带来什么回响？我不知道朋友们，活在当下吧",
             "header_img":"https://i.imgur.com/gt96wim.jpg",
