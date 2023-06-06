@@ -1,6 +1,12 @@
 {
     "blog":[
         {
+            "title":"Flutter-黑暗模式",
+            "subtitle":"关于Flutter如何实现黑暗模式",
+            "header_img":"https://i.imgur.com/r2SU91L.jpg",
+            "detail":"r2SU91L"
+        },
+        {
             "title":"Flutter-Android打包",
             "subtitle":"关于如何配置Android打包及相关信息",
             "header_img":"https://i.imgur.com/NLEwQtw.jpg",
