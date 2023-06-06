@@ -7,7 +7,7 @@
 * android-x86(x86)
 ## Apk打包命令
 
-* fatApk(包含全部架构平台)
+fatApk(包含全部架构平台)
 ```
 flutter build apk --obfuscate --split-debug-info=./symbols
 ```
@@ -27,7 +27,7 @@ android {
 }
 ···
 ```
-* abiApk(每个平台分离)
+abiApk(每个平台分离)
 ```
 flutter build apk --obfuscate --split-debug-info=./symbols --split-per-abi
 
@@ -84,7 +84,7 @@ android {
 
 *如果上架GooglePlay，GooglePlay会自动帮助签名，不需要自己维护签名*
 
-* keytool方式
+keytool方式
 ```
 //  -keystore：设置生成的文件名称，包含后缀；
 //  -alias：设置别名
@@ -113,7 +113,7 @@ CN=izpan, OU=izpan, O=izpan, L=SZ, ST=GD, C=CN是否正确?
 [否]: y
 ```
 
-* Android Studio生成
+Android Studio生成
 
 *生成签名文件*
 
