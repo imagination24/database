@@ -52,7 +52,7 @@ Widget _buildPage(BuildContext context) {
     );
   }
 ```
-<br/><br/><br/>
+  
 ## MaterialApp配置
 MaterialApp中有三个相关属性需要配置，如下，记住这个themeMode，等下要用。
 ```
@@ -76,7 +76,8 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
-<br/><br/><br/>
+
+
 ## Provider配置
 我们新建一个私有变量Mode，并重写get/set函数，暴露变量，并在改变变量时通知刷新。并写一个通过index获取ThemeMode的函数
 ```
@@ -133,7 +134,8 @@ class MyApp extends StatelessWidget {
 }
 ```
 这样我们的功能编写就完成了，接下来是UI
-<br/><br/><br/>
+
+
 ## DarkModeUI
 关键代码如下
 ```
@@ -169,12 +171,14 @@ Selector<AppSetting, int>(
 ![light](https://i.imgur.com/S3ufbDR.png)
 ![dark](https://i.imgur.com/e8JDzO5.png)
 
-<br/><br/><br/>
+
+
 ## ThemeData属性解释
 *bool? applyElevationOverlayColor*
 
 是否开启Material 2 黑暗模式下叠加层的阴影颜色，如果开启了Material 3就无效了
-<br/><br/><br/>
+
+
 *NoDefaultCupertinoThemeData? cupertinoOverrideTheme*
 
 默认情况下，cupertinoOverrideTheme为空，Material Theme 的后代 Cupertino 小部件将遵循从 Material ThemeData 派生的 CupertinoTheme。如果此项重写了， Cupertino 小部件将会遵循你重写的颜色.以下是可以重写的属性。
@@ -187,11 +191,15 @@ NoDefaultCupertinoThemeData NoDefaultCupertinoThemeData({
     Color? barBackgroundColor,
     Color? scaffoldBackgroundColor, })
 ```
-<br/><br/><br/>
+
+
+
 *Iterable<ThemeExtension<dynamic>>? extensions*
   
 null
-<br/><br/><br/>
+
+  
+  
 *inputDecorationTheme*
   
   输入装饰主题，[InputDecorator]、[TextField] 和 [TextFormField] 的默认 [InputDecoration] 值基于此主题。可以定义的配置如下。
@@ -230,7 +238,9 @@ null
   bool alignLabelWithHint = false,
   BoxConstraints? constraints, }) 
 ```
-  <br/><br/><br/>
+
+  
+  
 ```
 bool? applyElevationOverlayColor,
 NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
