@@ -1,9 +1,13 @@
 # 关于Flutter与原生通讯的几种方式的使用
 
 Flutter 与 原生通讯的方式有以下三种
-* BasicMessageChannel
-* MethodChannel
-* EventChannel
+
+BasicMessageChannel
+
+MethodChannel
+
+EventChannel
+
 
 三种Channel的构造函数都有三个成员变量
 
@@ -154,15 +158,19 @@ public class MyEventChannel implements FlutterStreamHandler {
 # 如何实现Channel?两种方式
 
 ## 1.实现Plugin（AndroidStudio演示）
-* 在AndroidStudio file卡 ，点击New ,点击Flutter Project
+
+在AndroidStudio file卡 ，点击New ,点击Flutter Project
+
 
 ![AndroidStudio](https://i.imgur.com/jFpaJwM.png)
 
-* 选择FlutterSDK路径，然后点击Next
+选择FlutterSDK路径，然后点击Next
+
 
 ![path](https://i.imgur.com/Pv7YMTt.png)
 
-* 填写相应信息，并选择项目类型为Plugin
+填写相应信息，并选择项目类型为Plugin
+
 
 *名字不能大写*
 
@@ -170,31 +178,31 @@ public class MyEventChannel implements FlutterStreamHandler {
 
 ![info](https://i.imgur.com/HAB0jlT.png)
 
-* 初始结构
+初始结构
 
 ![stru](https://i.imgur.com/PpyPu9c.png)
 
-* 如何引用
+如何引用
 
 *纯演示*
 
-  *上传到github,使用github地址引用*
+  上传到github,使用github地址引用
   ```
   skycastle:
       git:
         url: https://github.com/imagination24/skycastle.git
   ```
-  *使用plugin地址，做为本机插件使用
+  使用plugin地址，做为本机插件使用
   ```
   skycastle:
     path: *项目地址*
   ```
-  *上传到pub,使用项目名引用
+  上传到pub,使用项目名引用
   ```
     skycastle: ^0.0.1
   ```
 ## 2.手动注册（Android演示）
-* 在主项目的原生代码库中新建类编写原生代码
+在主项目的原生代码库中新建类编写原生代码
 ```
 public class SkyCastlePlugin implements FlutterPlugin, MethodCallHandler {
 
@@ -220,7 +228,7 @@ public class SkyCastlePlugin implements FlutterPlugin, MethodCallHandler {
     }
 }
 ```
-* 在MainActivity中注册插件
+在MainActivity中注册插件
 ```
 public class MainActivity extends FlutterActivity {
     @Override
