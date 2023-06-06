@@ -1,10 +1,14 @@
 # Flutter-Android 打包及相关设置
 
 ## Flutter 支持的平台 platformName(architecture)
-* android-arm64(arm64-v8a)
-* android-arm(armeabi-v7a)
-* android-x64(x86_64)
-* android-x86(x86)
+android-arm64(arm64-v8a)
+
+android-arm(armeabi-v7a)
+
+android-x64(x86_64)
+
+android-x86(x86)
+
 ## Apk打包命令
 
 fatApk(包含全部架构平台)
@@ -123,7 +127,8 @@ Android Studio生成
 
 *填写密钥库相关信息，然后点击OK*
 
-* 生成签名后在build.gradle中配置signingConfigs
+生成签名后在build.gradle中配置signingConfigs
+
 *填写生成签名时填入的信息，确保一致*
 ```
 ···
