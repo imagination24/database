@@ -38,7 +38,7 @@ class AppThemes {
           )
 ```
 
-需要注意的是如果ThemeData应用在代码上不起效果，可能是Scffold重写了主题，需要在wigget上套一个Theme,具体代码如下
+需要注意的是如果ThemeData应用在代码上不起效果，可能是Scffold重写了主题，需要在widget上套一个Theme,具体代码如下
 ```
 Widget _buildPage(BuildContext context) {
     return Theme(
