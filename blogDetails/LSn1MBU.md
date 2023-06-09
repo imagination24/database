@@ -437,8 +437,96 @@ class SkyCastlePainter extends CustomPainter{
 ![shadow](https://i.imgur.com/wGo4KgP.png)
 
 
-## 实战（一）圆形渐变进度条
+## 实战（一）低质量模仿AppleWatch表盘
 
+AppWatch表盘
 
+![appleWatch](https://i.imgur.com/xhXVE54.png)
+
+低质量模仿
+
+![watch](https://i.imgur.com/PZPzvpA.png)
+
+```
+class SkyCastlePainter extends CustomPainter{
+  static const Color watchBg = Color.fromRGBO(82, 102, 101, 1);
+  static const Color clothesColor = Color.fromRGBO(175, 104, 81, 1);
+  static const Color neckColor = Color.fromRGBO(202, 139, 109, 1);
+  static const Color hairColor = Color.fromRGBO(157, 130, 112, 1);
+  static const Color mountColor = Color.fromRGBO(69, 64, 64, 1);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    ///创建画笔
+    Paint paint = Paint()
+      ..color = watchBg
+      ..strokeWidth= 10
+      ..style = PaintingStyle.fill
+      ..strokeCap = StrokeCap.round
+      ..isAntiAlias = true;
+    ///定义背景形状
+    Rect rect = Offset.zero & const Size(300, 300);
+    RRect rRect = RRect.fromRectAndRadius(rect, const Radius.circular(80));
+    canvas.drawRRect(rRect, paint);
+    ///画身体
+    paint.color = clothesColor;
+    Rect ovalRect = Offset(0, size.height*4/5)&Size(size.width, size.height/2);
+    canvas.drawOval(ovalRect, paint);
+    ///画脖子
+    paint.color = neckColor.withOpacity(0.9);
+    paint.strokeWidth = 10;
+    paint.style = PaintingStyle.fill;
+    Path neckPath = Path()..moveTo(size.width*2/3, size.width*2/3);
+    neckPath.lineTo(size.width*2/3+2, size.width*6/7);
+    neckPath.arcToPoint(Offset(size.width*1/3, size.width*6/7-5),radius: Radius.circular(60));
+    neckPath.lineTo(size.width*1/3+2, size.width*2/3-15);
+    neckPath.arcToPoint(Offset(size.width*2/3, size.width*2/3),radius: Radius.circular(60),clockwise: false);
+    neckPath.close();
+    canvas.drawPath(neckPath, paint);
+    ///画阴影
+    Rect shadowOvalRect = Offset(size.width*1/3, size.width*6/7-40)& Size(100, 40);
+    Path shadowPath = Path()..addOval(shadowOvalRect);
+    canvas.drawShadow(shadowPath, Colors.grey.withOpacity(0.1), 0.5, true);
+    ///画脸
+    paint.color = neckColor;
+    Path facePath = Path()..moveTo(size.width*4/5, size.width/5);
+    Offset facePointOne = Offset(size.width*4/5+2, size.width/5+20);
+    facePath.arcToPoint(facePointOne,radius: const Radius.circular(40));
+    facePath.lineTo(size.width*4/5, size.width*6/7-90);
+    facePath.arcToPoint(Offset(size.width*1/3-30, size.width*6/7-110),radius: const Radius.circular(20),largeArc: true);
+    facePath.close();
+    canvas.drawPath(facePath, paint);
+    ///画头发
+    paint.color = hairColor;
+    Path hairPath = Path()..moveTo(size.width*4/5+10, size.width/5);
+    hairPath.arcToPoint(Offset(size.width*3/5, size.width/3),radius: const Radius.circular(100));
+    hairPath.arcToPoint(Offset(size.width*1/3+2, size.width/2),radius: Radius.circular(100),clockwise: false);
+    hairPath.arcToPoint(Offset(size.width*1/3-5, size.width/2+30),radius: Radius.circular(100),clockwise: false);
+    hairPath.arcToPoint(Offset(size.width*1/4, size.width*2/3),radius: Radius.circular(40));
+    hairPath.arcToPoint(Offset(size.width*1/4-20, size.width*2/3-10),radius: Radius.circular(20));
+    hairPath.arcToPoint(Offset(size.width/6, size.width/5),radius: Radius.circular(150));
+    hairPath.arcToPoint(Offset(size.width/2, size.width/10-20),radius: Radius.circular(110));
+    hairPath.arcToPoint(Offset(size.width*4/5, size.width/10-10),radius: Radius.circular(400));
+    hairPath.arcToPoint(Offset(size.width*4/5+10, size.width/5),radius: Radius.circular(24));
+    hairPath.close();
+    canvas.drawPath(hairPath, paint);
+
+    ///画嘴巴
+    paint.color = mountColor;
+    paint.strokeWidth = 5;
+    paint.style = PaintingStyle.stroke;
+    Rect mountRect = Offset(size.width/2-20, size.width*2/3-20)&Size(60, 30);
+    canvas.drawArc(mountRect, pi/4, pi/2, false, paint);
+
+    TextPainter textPainter = TextPainter(textDirection: TextDirection.ltr);
+    textPainter.text = const TextSpan(text: "10\\09",style: TextStyle(color: mountColor,fontSize: 45));
+    textPainter.layout();
+    textPainter.paint(canvas, Offset(size.width/2-45, size.width*2/3-70));
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+```
 
 
