@@ -448,15 +448,6 @@ AppWatch表盘
 ![watch](https://i.imgur.com/5ODNy5D.png)
 
 ```
-/*
-Time:2023/6/12
-Description:
-Author:
-*/
-
-import 'dart:math';
-
-import 'package:flutter/material.dart';
 
 class Watch extends StatelessWidget {
   final double width;
@@ -482,18 +473,15 @@ class Watch extends StatelessWidget {
     return SizedBox(
       width: width,
       height: width,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(width/4),
-        child: CustomPaint(
-          painter: _WatchPainter(
-              width: width,
-              clothesColor: clothesColor,
-              skinColor: skinColor,
-              hairColor: hairColor,
-              backgroundColor: backgroundColor,
-              text: text,
-              textStyle: textStyle),
-        ),
+      child: CustomPaint(
+        painter: _WatchPainter(
+            width: width,
+            clothesColor: clothesColor,
+            skinColor: skinColor,
+            hairColor: hairColor,
+            backgroundColor: backgroundColor,
+            text: text,
+            textStyle: textStyle),
       ),
     );
   }
@@ -535,6 +523,8 @@ class _WatchPainter extends CustomPainter {
     ///定义背景形状
     Rect rect = Offset.zero & Size(width, width);
     RRect rRect = RRect.fromRectAndRadius(rect,Radius.circular(width/4));
+
+    canvas.clipRRect(rRect);
     canvas.drawRRect(rRect, paint);
 
     ///画身体
@@ -577,7 +567,7 @@ class _WatchPainter extends CustomPainter {
     paint.color = mountColorOrigin;
     paint.style = PaintingStyle.stroke;
     paint.strokeWidth = width/60;
-    Rect mountRect = Offset(size.width*5/9, size.width*4/7)&Size(width/5, width/10);
+    Rect mountRect = Offset(width*5/9, width*4/7)&Size(width/5, width/10);
     canvas.drawArc(mountRect, pi/4, pi/2, false, paint);
 
     ///文字
@@ -590,10 +580,119 @@ class _WatchPainter extends CustomPainter {
     textPainter.paint(canvas, Offset((width-textPainter.width)*2/3, (width-textPainter.height)*2/5));
   }
 
+
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
+```
+
+## 实战（二）弧形文字
+
+![arcText](https://i.imgur.com/xoAbPix.png)
+
+```
+class ArcText extends StatelessWidget{
+  final double radius;
+  final String text;
+  final double startAngle;
+  final TextStyle textStyle;
+
+
+  const ArcText(
+      {super.key,
+      required this.radius,
+      required this.text,
+      required this.startAngle,
+      required this.textStyle});
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: _ArcTextPainter(
+          radius: radius,
+          text: text,
+          startAngle: startAngle,
+          textStyle: textStyle),
+    );
+  }
+}
+
+class _ArcTextPainter extends CustomPainter{
+  ///半径
+  final double radius;
+  ///文字
+  final String text;
+  ///起始角度
+  final double startAngle;
+  ///文字样式
+  final TextStyle textStyle;
+  ///文字画笔
+  final textPainter  = TextPainter(textDirection: TextDirection.ltr);
+
+  _ArcTextPainter({
+    required this.radius,
+    required this.text,
+    required this.startAngle,
+    required this.textStyle});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    ///将画布的左上角顶点移动到容器中心位置
+    ///这样做是为了方便后续画圆的旋转
+    ///why?画布的旋转是以左上角顶点为中心！
+    ///把画布的左上角平移到圆弧上
+    canvas.translate(size.width/2, size.height/2-radius);
+
+    ///计算起始角度
+    if (startAngle != 0) {
+      ///为什么只需要旋转一半的角度？
+      ///因为旋转的中心在圆弧上，圆弧上一个点到另一个点最多180
+      final rotationAngle = _calculateRotationAngle(0, startAngle);
+      canvas.rotate(rotationAngle);
+      ///通过起始角度计算旋转后的弦长即偏移的位置
+      ///公式：K=2Rsin(n/2)
+      ///??为什么要除2 offset=2*r*sin(angle/2)
+      ///得到和弦的长度，即偏移值
+      final offset = 2 * radius * sin(startAngle / 2);
+      ///位置回移
+      canvas.translate(offset, 0);
+    }
+    ///绘制文字
+    double angle = startAngle;
+    for (int i = 0 ; i < text.length; i++){
+      angle = _drawLetter(canvas, text[i], angle);
+    }
+  }
+
+
+  double _drawLetter(Canvas canvas, String letter,double prevAngle) {
+    textPainter.text = TextSpan(text: letter, style: textStyle);
+    textPainter.layout(
+      minWidth: 0,
+      maxWidth: double.maxFinite
+    );
+    final double d = textPainter.width;
+    /// 公式：a=2 * arcsin[d/(2r)]
+    /// why?公式来的。用就对了
+    /// 计算圆心角（偏移角度）
+    final alpha = 2 * asin(d/(2*radius));
+    final newAngle = _calculateRotationAngle(prevAngle, alpha);
+    canvas.rotate(newAngle);
+    textPainter.paint(canvas, Offset(0, -textPainter.height));
+    canvas.translate(d, 0);
+    return alpha;
+  }
+
+  double _calculateRotationAngle(double prevAngle,double alpha) =>
+      (alpha + prevAngle) /2;
+
+
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+
+}
 ```
 
 
