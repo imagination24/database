@@ -1,4 +1,16 @@
+
 # 关于Flutter与原生通讯的几种方式的使用
+
+## 目录
+- [关于Flutter与原生通讯的几种方式的使用](#--flutter-------------)
+  * [BasicMessageChannel](#basicmessagechannel)
+  * [MethodChannel](#methodchannel)
+  * [EventChannel](#eventchannel)
+- [如何实现Channel?两种方式](#----channel-----)
+  * [1.实现Plugin（AndroidStudio演示）](#1--plugin-androidstudio---)
+  * [2.手动注册（Android演示）](#2-----android---)
+
+
 
 Flutter 与 原生通讯的方式有以下三种
 
