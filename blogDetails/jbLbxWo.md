@@ -508,4 +508,100 @@ class RenderBallPulseSyncIndicator extends RenderBox {
 }
 ```
 
+## 实例三号-（BallRotateIndicator）
+是一个loading indicator,运行截图如下。
+
+![BallRotateIndicator](https://i.imgur.com/COHqepq.png)
+
+```
+class BallRotateIndicator extends LeafRenderObjectWidget {
+  final double minBallRadius;
+  final double maxBallRadius;
+  final double space;
+  final Color color;
+
+  const BallRotateIndicator({
+    super.key,
+    required this.minBallRadius,
+    required this.maxBallRadius,
+    required this.space,
+    required this.color});
+
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      RenderBallRotateIndicator(
+          minBallRadius: minBallRadius,
+          maxBallRadius: maxBallRadius,
+          space: space,
+          color: color);
+
+}
+
+class RenderBallRotateIndicator extends RenderBox {
+  final double minBallRadius;
+  final double maxBallRadius;
+  final double space;
+  final Color color;
+  final Duration duration = const Duration(milliseconds: 800);
+  double _progress = 0;
+  ///最新时间戳
+  int? _lastTimeStamp;
+
+
+  RenderBallRotateIndicator({
+    required this.minBallRadius,
+    required this.maxBallRadius,
+    required this.space,
+    required this.color
+  });
+
+  @override
+  void performLayout() {
+    size = constraints.constrain(
+        constraints.isTight
+            ? Size.infinite
+            : Size(maxBallRadius * 3 * 2 + space * 2, maxBallRadius * 2)
+    );
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    _drawBall(context, offset);
+    _scheduleAnimation();
+  }
+
+  void _drawBall(PaintingContext context, Offset offset) {
+    context.canvas.save();
+    context.canvas.translate(
+        offset.dx + size.width / 2, offset.dy + size.height / 2);
+    context.canvas.rotate(asin(_progress)*pi);
+    Paint paint = Paint()..color = color;
+    for(int i = 0;i < 3;i++){
+      double dx = (maxBallRadius * 2 * (i-1) + space * (i-1));
+      Offset dotOffset = Offset(dx, 0);
+      double dotRadius = maxBallRadius-(maxBallRadius-minBallRadius)*(asin(_progress.abs()).clamp(0, 1));
+      context.canvas.drawCircle(dotOffset, dotRadius, paint);
+    }
+    context.canvas.restore();
+  }
+
+  void _scheduleAnimation(){
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      _lastTimeStamp??=timeStamp.inMilliseconds;
+      ///计算时间间隔占比
+      double delta = (timeStamp.inMilliseconds - _lastTimeStamp!) /
+          duration.inMilliseconds;
+      _progress = _progress + delta;
+      if(_progress>=1) _progress = -1 ;
+      markNeedsPaint();
+      _lastTimeStamp = timeStamp.inMilliseconds;
+    });
+  }
+
+  @override
+  bool hitTestSelf(Offset position) => true;
+
+}
+```
+
 
