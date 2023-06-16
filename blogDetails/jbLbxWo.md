@@ -426,5 +426,86 @@ class RenderSkyCastleCheckBox extends RenderBox {
 }
 ```
 
+## 实例二号（BallPulseSyncIndicator）
+是一个loading indicator,运行截图如下。
+
+![BallPulseSyncIndicator](https://i.imgur.com/QtTsJa7.png)
+
+```
+class BallPulseSyncIndicator extends LeafRenderObjectWidget {
+  final double radius;
+  final Color color;
+  final double space;
+
+  const BallPulseSyncIndicator(
+      {super.key,
+      required this.radius,
+      required this.color,
+      required this.space});
+
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      RenderBallPulseSyncIndicator(
+          radius: radius,
+          color: color,
+          space: space);
+}
+
+class RenderBallPulseSyncIndicator extends RenderBox {
+  final double radius;
+  final Color color;
+  final double space;
+
+  List<double> extentList = [1.11976951, 0.64350111, 0.30469265];
+
+  double progress = 0;
+
+  RenderBallPulseSyncIndicator(
+      {required this.radius,
+      required this.color,
+      required this.space});
+
+
+  @override
+  void performLayout() {
+    size = constraints
+        .constrain(constraints.isTight ? Size.infinite : const Size(100, 30));
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    super.paint(context, offset);
+    _drawBall(context, offset);
+    _scheduler();
+  }
+
+  _drawBall(PaintingContext context, Offset offset) {
+    Paint paint = Paint()
+      ..color = color
+      ..strokeWidth = radius;
+    for (int i = 0; i < 3; i++) {
+      double dx = (offset.dx + size.width / 2) -
+          (radius * 2 * (i-1) + space * (i-1));
+      double dy = offset.dy +
+          size.height / 2 -
+          sin(progress * pi + extentList[i]).abs() * radius * 2 +
+          radius;
+      Offset dotOffset = Offset(dx, dy);
+      context.canvas.drawCircle(dotOffset, radius, paint);
+    }
+  }
+
+  _scheduler() {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      progress = progress + 0.020;
+      if (progress == double.infinity) progress = 0;
+      markNeedsPaint();
+    });
+  }
+
+  @override
+  bool hitTestSelf(Offset position) => true;
+}
+```
 
 
